@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Screen Hype</string>
+    <string name="splash_anim_filename">splash_anim.json</string>
+</resources>
