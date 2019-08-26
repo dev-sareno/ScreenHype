@@ -2,6 +2,7 @@ package com.example.screenhype.controller
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import com.example.screenhype.MainActivity
 import com.facebook.litho.Component
 import io.reactivex.subjects.PublishSubject
 
@@ -11,7 +12,7 @@ class AppController(
 
     interface Impl {
         fun getContext(): Context
-        fun getActivity(): AppCompatActivity
+        fun getActivity(): MainActivity
         fun onCreateInitialPage(): Component
     }
 
@@ -25,7 +26,7 @@ class AppController(
     }
 
     fun context(): Context = mImpl.getContext()
-    fun activity(): AppCompatActivity = mImpl.getActivity()
+    fun activity(): MainActivity = mImpl.getActivity()
 
     // Page Navigation
     fun push(component: Component) {
@@ -35,6 +36,11 @@ class AppController(
     fun pop() {
         if (pages.size == 1) return
         pages.removeAt(pages.lastIndex)
+        rxPages.onNext(pages)
+    }
+    fun pushAsBase(component: Component) {
+        pages.clear()
+        pages.add(component)
         rxPages.onNext(pages)
     }
 

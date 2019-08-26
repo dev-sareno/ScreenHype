@@ -3,7 +3,7 @@ package com.example.screenhype.network
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiManger {
+object ApiManager {
 
     private var retrofit: Retrofit? = null
     private fun getRetrofit(): Retrofit {

@@ -3,6 +3,7 @@ package com.example.screenhype.ui
 import android.graphics.Color
 import android.text.Layout
 import android.util.Log
+import android.view.animation.BounceInterpolator
 import com.example.screenhype.Utils
 import com.example.screenhype.controller.AppController
 import com.facebook.litho.*
@@ -19,10 +20,11 @@ object UISplashScreenSpec: UISpec(
 ) {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext): Component {
+    fun onCreateLayout(c: ComponentContext,
+                       @TreeProp appController: AppController
+    ): Component {
         return Column.create(c)
-            .also { asPage<UISplashScreenSpec>(it) }
-            .transitionKey("page")
+            .also { asPage<UISplashScreenSpec>(appController, it) }
             .widthPercent(100f)
             .heightPercent(100f)
             .also { Utils.addBorder(c, it) }
@@ -64,12 +66,6 @@ object UISplashScreenSpec: UISpec(
                 .clickHandler(UISplashScreen.onPopClicked(c))
                 .build())
             .build()
-    }
-
-    @OnCreateTransition
-    fun onCreateTransition(c: ComponentContext): Transition {
-        return Transition.create("page")
-            .animate(AnimatedProperties.SCALE)
     }
 
     @OnEvent(ClickEvent::class)

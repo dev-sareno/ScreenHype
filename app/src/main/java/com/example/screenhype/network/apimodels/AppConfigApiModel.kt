@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class AppConfigApiModel {
     @SerializedName("splash")
-    val splash: AppConfigSplashApiModel? = null
+    val splash: AppConfigSplashApiModel = AppConfigSplashApiModel()
 }

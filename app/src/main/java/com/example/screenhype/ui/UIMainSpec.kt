@@ -1,11 +1,11 @@
 package com.example.screenhype.ui
 
 import android.util.Log
+import android.view.animation.BounceInterpolator
 import com.example.screenhype.controller.AppController
 import com.facebook.litho.*
 import com.facebook.litho.animation.AnimatedProperties
 import com.facebook.litho.annotations.*
-import com.facebook.yoga.YogaPositionType
 import io.reactivex.disposables.CompositeDisposable
 
 @LayoutSpec
@@ -52,18 +52,18 @@ object UIMainSpec: UISpec(
                     uiBuilder.child(page)
                 }
             }
-//            .clickHandler(UIMain.onComponentClicked(c, null))
+            .clickHandler(UIMain.onComponentClicked(c, null))
             .build()
     }
 
-//    @OnEvent(ClickEvent::class)
-//    fun onComponentClicked(c: ComponentContext,
-//                           @Param component: Component?
-//    ) {
-//        if (component != null && !component.hasClickHandlerSet()) {
-//            Log.v(TAG, "Component clicked")
-//        }
-//    }
+    @OnEvent(ClickEvent::class)
+    fun onComponentClicked(c: ComponentContext,
+                           @Param component: Component?
+    ) {
+        if (component != null && !component.hasClickHandlerSet()) {
+            Log.v(TAG, "Component clicked")
+        }
+    }
 
 //    @OnCreateTransition
 //    fun onCreateTransition(c: ComponentContext,
@@ -71,8 +71,10 @@ object UIMainSpec: UISpec(
 //    ): Transition {
 //        // We animate the last page only
 //        val lastChildIndex = pages.size - 1
-//        return Transition.create("aaa")
+//        Log.d("YYY", "YYY-page-position-$lastChildIndex")
+//        return Transition.create(Transition.TransitionKeyType.GLOBAL, "page-position-$lastChildIndex")
 //            .animate(AnimatedProperties.X)
+//            .animator(Transition.timing(350, BounceInterpolator()))
 //    }
 
     @OnUpdateState
